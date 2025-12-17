@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Python Version
+.python-version
+
+# data files
+data/
+
+# MLRun files
+mlruns/
+notebook/mlflow.db
+
+# Model files
+model/
+
+
