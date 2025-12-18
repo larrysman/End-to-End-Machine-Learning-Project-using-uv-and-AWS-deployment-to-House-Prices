@@ -1,5 +1,7 @@
 ### ========================= STAGE 01 - DATA LOADING AND SPLITTING MODULE =========================== ###
-
+"""
+FUNCTIONS TO LOAD RAW DATA, CONVERT DATE TO STANDARD DATETIME, SPLIT DATASETS INTO TRAINING, EVALUATION AND HOLDOUT. SAVE THE SPLITTED DATASETS INTO A NEW FOLDER (../DATA/RAW).
+"""
 # IMPORT RELEVANT LIBRARIES
 import pandas as pd
 import os
@@ -60,4 +62,3 @@ def saving_output_files() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 if __name__ == "__main__":
     print("Running data loader module...")
     train_df, eval_df, holdout_df = saving_output_files()
-
