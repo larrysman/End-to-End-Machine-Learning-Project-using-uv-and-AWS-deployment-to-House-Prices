@@ -22,4 +22,8 @@ notebook/mlflow.db
 # Model files
 model/
 
+# CONFIG files
+config.py
+
+
 
