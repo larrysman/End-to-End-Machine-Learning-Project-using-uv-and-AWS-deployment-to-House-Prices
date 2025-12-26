@@ -6,6 +6,7 @@ FUNCTIONS TO LOAD RAW DATA, CONVERT DATE TO STANDARD DATETIME, SPLIT DATASETS IN
 import pandas as pd
 import os
 import config
+from typing import Optional
 
 # PATH TO THE RAW DATA
 raw_data_and_path = config.RAW_DATA_PATH["PATH"]
@@ -14,10 +15,22 @@ raw_data_and_path = config.RAW_DATA_PATH["PATH"]
 def load_data(data_path: str = raw_data_and_path) -> pd.DataFrame:
     return pd.read_csv(data_path)
 
+def data_sample(df: pd.DataFrame, sample_frac: Optional[float], random_state: int=42) -> pd.DataFrame:
+    if sample_frac is None:
+        return df
+    sample_frac = float(sample_frac)
+    if sample_frac <= 0 or sample_frac >= 1:
+        return df
+    print(f"✅ {sample_frac*100}% of the raw dataset is loaded for further analysis.")
+    return df.sample(frac=sample_frac, random_state=random_state).reset_index(drop=True)
+
 # DATE CONVERSION TO DATETIME OBJECT
 def convert_date_column(date_column: str = "date") -> pd.DataFrame:
     df = load_data()
+    df = data_sample(df, sample_frac=0.6)
     df[date_column] = pd.to_datetime(df[date_column])
+    print(f"The starting date is: {df[date_column].min()}")
+    print(f"The ending date is: {df[date_column].max()}")
     df = df.sort_values(by=date_column)
     df.reset_index(drop=True, inplace=True)
     return df
