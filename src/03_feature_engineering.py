@@ -212,9 +212,9 @@ def feature_engineering_pipeline(df1: pd.DataFrame, df2: pd.DataFrame, df3: pd.D
     eval_df = engineer_date_features(eval)
     holdout_df = engineer_date_features(holdout)
     # DATASETS WITHOUT COMPUTING VIF AND MULTICOLLINEARITY
-    train_reserved = train.copy()
-    eval_reserved = eval.copy()
-    holdout_reserved = holdout.copy()
+    train_reserved = engineer_date_features(train.copy())
+    eval_reserved = engineer_date_features(eval.copy())
+    holdout_reserved = engineer_date_features(holdout.copy())
     # COLUMNS WITH HIGH VIF REMOVED FROM DATASETS
     OFFSET_COLUMNS = compute_variance_inflation_factor_optimized(train_df, target_col="price", vif_threshold=1000)
     train_df = train_df.drop(columns=OFFSET_COLUMNS)
