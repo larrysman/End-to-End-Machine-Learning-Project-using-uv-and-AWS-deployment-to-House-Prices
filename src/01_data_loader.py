@@ -27,6 +27,7 @@ def data_sample(df: pd.DataFrame, sample_frac: Optional[float], random_state: in
 # DATE CONVERSION TO DATETIME OBJECT
 def convert_date_column(date_column: str = "date") -> pd.DataFrame:
     df = load_data()
+    # TAKING 60% OF THE DATA
     df = data_sample(df, sample_frac=0.6)
     df[date_column] = pd.to_datetime(df[date_column])
     print(f"The starting date is: {df[date_column].min()}")

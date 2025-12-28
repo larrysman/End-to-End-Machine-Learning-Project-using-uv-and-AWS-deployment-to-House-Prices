@@ -18,12 +18,10 @@ data/
 # MLRun files
 mlruns/
 notebook/mlflow.db
+mlflow.db
 
 # Model files
 model/
 
 # CONFIG files
 config.py
-
-
-
