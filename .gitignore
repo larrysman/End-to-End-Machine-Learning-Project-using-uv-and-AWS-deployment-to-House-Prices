@@ -25,3 +25,12 @@ model/
 
 # CONFIG files
 config.py
+# Additional scripts
+test_hyper.py
+
+# project summary
+PROJECT_PORTFOLIO_SUMMARY.md
+
+
+
+

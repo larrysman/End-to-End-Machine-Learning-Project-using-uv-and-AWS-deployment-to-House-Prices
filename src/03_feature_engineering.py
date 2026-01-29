@@ -133,7 +133,8 @@ def features_correlation_with_target(df: pd.DataFrame, target_col: str=None):
     corr_with_target = num_features.corr(method='pearson')[target_col].drop(target_col).sort_values(ascending=False)
 
     sb.set_theme(style="whitegrid")
-    sb.set(font_scale=1.2)
+    #sb.set(font_scale=1.2)
+    sb.set_palette(font_scale=1.2)
     plt.figure(figsize=(15, 7))
     ax = sb.heatmap(
         corr_with_target.to_frame(),
