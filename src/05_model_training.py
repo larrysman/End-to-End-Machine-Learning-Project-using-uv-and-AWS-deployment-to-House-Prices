@@ -159,6 +159,7 @@ def model_training_without_preprocessing(df1: pd.DataFrame, df2: pd.DataFrame, t
     return model, METRICS
 
 model_training_without_preprocessing(train_, eval_, "price")
+
 if __name__ == "__main__":
     model_prep, METRICS_prep = model_training_for_prep_data(train_prep, eval_prep, "price")
     model_wto, METRICS_wto = model_training_without_preprocessing(train_, eval_, "price")
