@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 
+# PYTEST CACHE
+.pytest_cache
+
 # Virtual environments
 .venv
 
@@ -30,6 +33,12 @@ test_hyper.py
 
 # project summary
 PROJECT_PORTFOLIO_SUMMARY.md
+
+# TEST FOLDER FOR UNIT TEST
+test_workflow/test_loader.py
+test_workflow\test_loader.py
+
+
 
 
 
