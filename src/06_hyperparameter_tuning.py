@@ -182,3 +182,6 @@ def finetune_model(df1: pd.DataFrame, df2: pd.DataFrame, n_trials: int, exp_name
 if __name__ == "__main__":
     baseline_model_mlfow_log(model_path, model_name, metric_path, metric_name)
     finetune_model(train_df, eval_df, n_trials=10, exp_name="EXRATREESREGRESSOR_OPTUNA_FOR_HOUSING_PRICE")
+
+
+"""TO OPEN THE MLFLOW UI AFTER THE FULLY RETRAINED TO SEE LOGS: $ mlflow ui"""

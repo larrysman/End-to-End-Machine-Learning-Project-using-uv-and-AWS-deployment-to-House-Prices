@@ -66,7 +66,7 @@ def model_training_for_prep_data(df1: pd.DataFrame, df2: pd.DataFrame, target_co
     metric_path = os.path.join(os.getcwd(), "model", "model_metrics")
     os.makedirs(metric_path, exist_ok=True)
 
-    # SAVING THE OUTCOMES FILE AND SCALERS INTO THE CREATED FOLDERS
+    # SAVING THE OUTCOMES ARTIFACTS INTO THE CREATED FOLDERS
     joblib.dump(
         model,
         os.path.join(model_path, "trained_model_for_preproceesed_data.joblib"),
@@ -136,7 +136,7 @@ def model_training_without_preprocessing(df1: pd.DataFrame, df2: pd.DataFrame, t
     metric_path = os.path.join(os.getcwd(), "model", "model_metrics")
     os.makedirs(metric_path, exist_ok=True)
 
-    # SAVING THE OUTCOMES FILE AND SCALERS INTO THE CREATED FOLDERS
+    # SAVING THE OUTCOMES ARTIFACTS INTO THE CREATED FOLDERS
     joblib.dump(
         model,
         os.path.join(model_path, "trained_model_for_unpreprocessed_data.joblib"),
@@ -158,7 +158,7 @@ def model_training_without_preprocessing(df1: pd.DataFrame, df2: pd.DataFrame, t
 
     return model, METRICS
 
-model_training_without_preprocessing(train_, eval_, "price")
+# model_training_without_preprocessing(train_, eval_, "price")
 
 if __name__ == "__main__":
     model_prep, METRICS_prep = model_training_for_prep_data(train_prep, eval_prep, "price")
