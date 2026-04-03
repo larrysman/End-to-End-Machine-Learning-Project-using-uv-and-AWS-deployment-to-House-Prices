@@ -3,31 +3,46 @@
 THE INFERENCE PIPELINE TAKES EXTERNAL UNSEEN DATA AND ALLOW THE DATA GO THROUGH ALL THE STAGES - 01 - 04
 The external data is then ready to access the model and make predictions. Here, the external unseen dataset is the
 holdout.csv, this dataset is already cleaned, feature engineered that is, STAGES 01 - 03 is applied already.
-Normally, this pipeline would have be developed to account for all those stages and the unseen dataset would have to pass through
-all at the inference stage.
+Normally, this pipeline would have been developed to account for all those stages and the unseen dataset would have to pass through
+all the stages 01 - 04 at the inference pipeline stage.
 
 We need to import the holdout.csv (feat_eng_wtoVIFholdout.csv and feat_eng_wtVIFholdout.csv) -
 since this was what the model was trained on, preprocessors and model ONLY in this inference pipeline.
-Note: I am only considering both unpreprocessed/preprocessed holdout datasets, that is, holdout dataset with/without VIF which follows the trained model.
+Note: I am only considering both unpreprocessed/preprocessed holdout datasets, that is, holdout dataset with/without VIF which follows the trained model pipeline.
+
+INFERENCE PIPELINE FOR A HOSUING PRICE REGRESSION PROBLEM
+
+- Takes RAW input data (same schema as holdout.csv).
+- Preprocesss the data using stages 01 - 03 (if data is unpreprocessed) using the saved preprocessors or just apply stage 04 if the data is preproceesed.
+- Aligns the feature with the trained model features.
+- Loads the trained model and makes predictions.
+- Returns the predictions.
+
+RAW -> CLEANING -> FEATURE_ENGINEERING -> PREPROCESSING -> ALIGNED_SCHEMA -> MODEL.PREDICT - PREDICTIONS
 """
 
 # IMPORT NECESSARY LIBRARIES
 import pandas as pd
 import os
 import joblib
+from pathlib import Path
 
 # ============================================================================================= #
 # =============== INFERENCE PIPELINE FOR EXTERNAL DATASET WITHOUT VIF PREPROCESSED ============ #
 # ============================================================================================= #
+
+"""PROJECT_ROOT = Path(__file__).resolve().parents[1]
+INFERENCE_DATA = PROJECT_ROOT/"data/featured_engineered/feat_eng_wtoVIFholdout.csv"
+"""
 
 # LOADS THE INFERENCE DATASET, PREPROCESSORS AND MODELS (TRAINED_MODEL, FINETUNED_BEST_MODEL)
 inference_data_path = "./data/feature_engineered/"
 inference_data_name = "feat_eng_wtoVIFholdout.csv"
 
 trained_model_path = "./model/trained_models/"
-best_finetuned_model_path = "./model/finetuned_best_models/"
-
 trained_model_name="trained_model_for_unpreprocessed_data.joblib"
+
+best_finetuned_model_path = "./model/finetuned_best_models/"
 best_finetuned_model_name = "best_model.joblib"
 
 # FUNCTION TO LOAD THE INFERENCE DATA
@@ -42,7 +57,7 @@ def load_pretrained_artifacts(art_path: str, art_name: str):
 
 
 # =============================================== #
-# ========= FUNCTION INFERENCE PIPELINE ========= #
+# ========= FUNCTION FOR INFERENCE PIPELINE ===== #
 # =============================================== #
 def inference_pipeline(target_col: str | None = None):
     # LOADING THE INFERENCE DATASET
@@ -114,10 +129,10 @@ def inference_pipeline_with_vif(target_col: str | None = None):
     return pred_df
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     price_pred_wto_vif = inference_pipeline('price')
     print(price_pred_wto_vif.head())
     print("="*100)
     price_pred_wt_vif = inference_pipeline_with_vif('price')
     print(price_pred_wt_vif.head())
-    print("✅ Inference Pipeline is Successfully for unpreprocessed and preprocessed datasets.")
+    print("✅ INFERENCE PIPELINE WAS SUCCESSFUL FOR PREPROCESSED & UNPREPROCESSED DATASETS!")
